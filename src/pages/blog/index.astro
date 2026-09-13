@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const posts=(await getCollection("blog")).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+const covers: Record<string,string> = { "Facturación":"/blog-facturacion.webp", "Contratos":"/blog-contratos.webp", "Software":"/blog-software.webp" };
+---
+<Layout title="Blog Clainev — Facturación, contratos y software para tu negocio" description="Artículos sobre facturación electrónica, contratos y tecnología para negocios peruanos.">
+  <main class="page"><header class="page-hero blog-landing"><div><p class="eyebrow">Blog / Desde el taller</p><h1>Información que sí puedes usar.</h1><p>Facturación, contratos y software explicados sin jerga para negocios peruanos.</p></div><img src="/clainev-products-ai.webp" alt="Escultura editorial sobre facturación y análisis de contratos"/></header><section class="section" style="padding-top:0"><div class="blog-grid">{posts.map(post=><a class="post-card" href={`/blog/${post.id}/`}><img class="post-cover" src={covers[post.data.category] ?? "/blog-software.webp"} alt="" loading="lazy"/><div class="post-meta"><span>{post.data.category}</span><span>{post.data.readingTime}</span></div><h2>{post.data.title}</h2><p>{post.data.description}</p><span>Leer artículo ↗</span></a>)}</div></section></main>
+</Layout>

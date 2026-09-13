@@ -1,0 +1,11 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+export async function getStaticPaths(){return (await getCollection("blog")).map(post=>({params:{id:post.id},props:{post}}));}
+const { post }=Astro.props; const { Content }=await render(post);
+const covers: Record<string,string> = { "Facturación":"/blog-facturacion.webp", "Contratos":"/blog-contratos.webp", "Software":"/blog-software.webp" };
+const cover=covers[post.data.category] ?? "/blog-software.webp";
+---
+<Layout title={`${post.data.title} | Blog Clainev`} description={post.data.description}>
+  <main class="page"><article class="article page-hero"><div class="post-meta"><span>{post.data.category}</span><span>{post.data.readingTime}</span></div><h1>{post.data.title}</h1><p>{post.data.description}</p><img class="article-cover" src={cover} alt=""/><div class="article-body"><Content/></div><p style="margin-top:4rem"><a class="btn" href="/blog">← Volver al blog</a></p></article></main>
+</Layout>

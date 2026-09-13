@@ -1,0 +1,41 @@
+---
+import Motion from "../components/Motion.astro";
+import "../styles/global.css";
+interface Props { title:string; description:string; }
+const { title, description } = Astro.props;
+const nav=[['Productos','/#productos'],['Servicios','/#servicios'],['Quiénes somos','/#nosotros'],['Blog','/blog']];
+---
+<!doctype html>
+<html lang="es">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><meta name="description" content={description}/><meta name="theme-color" content="#f4f1e8"/><link rel="icon" href="/favicon.svg"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><title>{title}</title><Motion/></head>
+<body>
+  <header class="nav">
+    <a class="logo" href="/" aria-label="Clainev, inicio"><i>C</i> CLAINEV</a>
+    <p class="nav-stamp">Estudio de software<br/>Lima, Perú</p>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-panel"><span class="menu-label">Menú</span><i aria-hidden="true"></i></button>
+  </header>
+  <aside id="menu-panel" class="menu-panel" aria-hidden="true">
+    <div class="menu-monogram" aria-hidden="true">C</div>
+    <nav class="menu-links" aria-label="Navegación principal">{nav.map(([label,href],index)=><a href={href}><sup>{String(index+1).padStart(2,'0')}</sup><span>{label}</span><em>↗</em></a>)}</nav>
+    <div class="menu-foot"><span>Construimos software útil.</span><a href="/#contacto">Hablemos de tu proyecto ↗</a><a href="https://instagram.com/clainev_oficial" target="_blank">Instagram ↗</a></div>
+  </aside>
+  <slot/>
+  <footer><div class="footer-top"><a class="footer-logo" href="/">CLAINEV<span>®</span></a><p>Software útil.<br/>Hecho en Lima.</p><div class="footer-links"><a href="/#productos">Productos</a><a href="/#servicios">Servicios</a><a href="/#nosotros">Nosotros</a><a href="/blog">Blog</a></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Clainev</span><span>Lima, Perú · 12°S 77°W</span><a href="https://instagram.com/clainev_oficial" target="_blank">Instagram ↗</a></div></footer>
+  <script>
+    import gsap from "gsap";
+    function initMenu(){
+      const button=document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const panel=document.querySelector<HTMLElement>('.menu-panel');
+      if(!button||!panel||button.dataset.ready)return;
+      button.dataset.ready='true'; let open=false;
+      gsap.set(panel,{clipPath:'inset(0 0 100% 0)',autoAlpha:0});
+      const setMenu=(next:boolean)=>{open=next;button.setAttribute('aria-expanded',String(open));panel.setAttribute('aria-hidden',String(!open));button.querySelector('.menu-label')!.textContent=open?'Cerrar':'Menú';
+        if(open){document.body.classList.add('menu-open');gsap.set(panel,{autoAlpha:1});gsap.to(panel,{clipPath:'inset(0 0 0% 0)',duration:.68,ease:'power4.inOut'});gsap.fromTo('.menu-links a',{yPercent:110},{yPercent:0,duration:.72,stagger:.05,ease:'power4.out',delay:.16});gsap.fromTo('.menu-monogram',{scale:.78,rotate:-8,autoAlpha:0},{scale:1,rotate:0,autoAlpha:1,duration:.85,ease:'expo.out',delay:.1});}
+        else{gsap.to(panel,{clipPath:'inset(0 0 100% 0)',duration:.52,ease:'power4.inOut',onComplete:()=>{gsap.set(panel,{autoAlpha:0});document.body.classList.remove('menu-open')}});}
+      };
+      button.addEventListener('click',()=>setMenu(!open));panel.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false)));document.addEventListener('keydown',event=>{if(event.key==='Escape'&&open)setMenu(false)});
+    }
+    document.addEventListener('astro:page-load',initMenu);
+  </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const posts=(await getCollection("blog")).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,3);
+const covers: Record<string,string> = { "Facturación":"/blog-facturacion.webp", "Contratos":"/blog-contratos.webp", "Software":"/blog-software.webp" };
+const faqEmitiva=[['¿Qué es Emitiva?','Una API de facturación electrónica para SUNAT. Emite facturas, boletas, notas de crédito y débito desde tu propio sistema.'],['¿Necesito ser desarrollador para usarla?','Sí, está pensada para integrarse vía API. Si no tienes equipo técnico, contáctanos y evaluamos opciones.'],['¿Qué tipos de comprobantes emite?','Los seis tipos principales de comprobantes electrónicos exigidos por SUNAT.'],['¿Cómo protegen mis credenciales?','Las credenciales SUNAT se almacenan con cifrado AES-256-GCM.'],['¿Cuánto cuesta?','Puedes probar con el plan gratuito. Los planes pagos empiezan en S/99 al mes, según el volumen de emisión.']];
+const faqFirma=[['¿Reemplaza a un abogado?','No. Es una primera capa para detectar riesgos evidentes; en casos complejos recomendamos revisión legal.'],['¿Qué contratos analiza?','Arrendamiento, prestación de servicios, laborales y otros contratos comunes en Perú.'],['¿Cómo funciona el semáforo?','Clasifica cada cláusula en verde, amarillo o rojo para mostrar dónde necesitas poner atención.'],['¿Cuánto cuesta?','Prueba gratuita con límites y plan ilimitado por S/29.90 al mes.']];
+---
+<Layout title="Clainev — Software que resuelve problemas reales para negocios peruanos" description="Estudio de software peruano. Creamos Emitiva, Firma Segura y desarrollo a medida para PYMEs.">
+<main class="page">
+<section class="hero">
+  <div class="hero-meta">
+<span>Estudio de software peruano</span>
+<span>Lima · Perú · 2026</span>
+</div>
+  <h1 class="hero-title">
+<span class="clip">
+<span data-hero-line>Software que</span>
+</span>
+<span class="clip indent">
+<span data-hero-line>
+<em>resuelve</em> problemas</span>
+</span>
+<span class="clip">
+<span data-hero-line>reales.</span>
+</span>
+</h1>
+  <div class="hero-card">
+<div>
+<span>↘</span>No pitch.<br/>Solo producto.</div>
+</div>
+  <figure class="hero-ai" aria-hidden="true"><img src="/clainev-hero-ai.webp" alt=""/><figcaption>Software / operación / contratos</figcaption></figure>
+  <div class="hero-bottom">
+<p class="hero-copy">Herramientas para operar mejor, cumplir con SUNAT y firmar con menos riesgo. Hechas en Perú, sin la lentitud de un ERP.</p>
+<div class="hero-actions">
+<a class="btn solid" href="#productos">Ver productos ↓</a>
+<a class="btn" href="#contacto">Hablar con nosotros ↗</a>
+</div>
+</div>
+</section>
+<div class="ticker">
+<div class="ticker-track" data-marquee>FACTURACIÓN SUNAT ✦ CONTRATOS SIN SORPRESAS ✦ SOFTWARE A MEDIDA ✦ HECHO EN PERÚ ✦ FACTURACIÓN SUNAT ✦ CONTRATOS SIN SORPRESAS ✦ SOFTWARE A MEDIDA ✦ HECHO EN PERÚ ✦</div>
+</div>
+<section id="nosotros" class="section dark">
+<div class="section-head">
+<p class="eyebrow" data-reveal>01 / Quiénes somos</p>
+<div>
+<h2 data-reveal>Soluciones digitales pensadas para ayudarte a avanzar.</h2>
+<p class="muted" data-reveal>Somos un estudio de software peruano. Creamos productos digitales y soluciones a medida que buscan simplificar tareas, ordenar procesos y hacer más fácil el día a día de cada negocio.</p>
+</div>
+</div>
+<div class="principles" data-stagger>
+<article class="principle">
+<span>01 / Lo que hacemos</span>
+<h3>Convertimos necesidades en soluciones.</h3>
+<p>Desarrollamos herramientas enfocadas en necesidades concretas, desde facturación electrónica y revisión de contratos hasta sistemas adaptados a la operación de un negocio.</p>
+</article>
+<article class="principle">
+<span>02 / Nuestro enfoque</span>
+<h3>La tecnología debe sentirse útil.</h3>
+<p>Buscamos que cada solución sea clara, práctica y fácil de incorporar, sin añadir complejidad donde no hace falta.</p>
+</article>
+<article class="principle">
+<span>03 / Para tu negocio</span>
+<h3>Una solución que tenga sentido para ti.</h3>
+<p>Escuchamos lo que necesitas y planteamos una alternativa acorde con tus objetivos, ya sea uno de nuestros productos o un desarrollo a medida.</p>
+</article>
+</div>
+</section>
+<section id="productos" class="products" data-stagger>
+  <article class="product-card">
+<div class="product-num">
+<span>Producto / 01</span>
+<span>API</span>
+</div>
+<h3>Emitiva</h3>
+<strong>Facturación electrónica SUNAT, vía API.</strong>
+<p>Emite comprobantes desde tu sistema sin pelear con la documentación de SUNAT.</p>
+<a class="product-link" href="#contacto">Probar Emitiva <span>↗</span>
+</a>
+</article>
+  <article class="product-card">
+<div class="product-num">
+<span>Producto / 02</span>
+<span>IA + Legal</span>
+</div>
+<h3>Firma<br/>Segura</h3>
+<strong>Antes de firmar, entiende qué estás firmando.</strong>
+<p>Detecta cláusulas riesgosas con IA y entiéndelas en lenguaje simple.</p>
+<a class="product-link" href="#contacto">Probar Firma Segura <span>↗</span>
+</a>
+</article>
+</section>
+<figure class="product-showcase"><img src="/clainev-products-ai.webp" alt="Escultura editorial que conecta facturación electrónica y análisis de contratos"/><figcaption><span>Dos productos.</span><span>Una misma obsesión: quitar fricción.</span></figcaption></figure>
+<section hidden id="emitiva" class="section" style="background:var(--blue)">
+  <div class="section-head">
+<p class="eyebrow">Clainev / Producto 01</p>
+<div>
+<h2 data-reveal>Tu sistema habla con SUNAT. Sin el drama.</h2>
+<p data-reveal>Emitiva convierte la complejidad de la facturación electrónica en una API clara, segura y rápida de integrar.</p>
+</div>
+</div>
+  <div class="principles" data-stagger>
+<article class="principle">
+<span>01</span>
+<h3>API simple</h3>
+<p>Endpoints claros y respuestas que tu equipo puede entender.</p>
+</article>
+<article class="principle">
+<span>02</span>
+<h3>Seis comprobantes</h3>
+<p>La cobertura esencial para operar formalmente en Perú.</p>
+</article>
+<article class="principle">
+<span>03</span>
+<h3>Seguridad real</h3>
+<p>Credenciales protegidas con cifrado AES-256-GCM.</p>
+</article>
+</div>
+  <div class="section-head" style="margin-top:clamp(4rem,8vw,6rem);margin-bottom:2rem">
+<p class="eyebrow">Precios</p>
+<div>
+<h2>Empieza gratis.<br/>Crece desde S/99.</h2>
+<p class="muted">Prueba la integración sin costo y elige un plan según tu volumen cuando pases a producción.</p>
+</div>
+</div>
+  <div class="faq-list">{faqEmitiva.map(([q,a])=>
+<details>
+<summary>{q}</summary>
+<p>{a}</p>
+</details>)}</div>
+</section>
+<section hidden class="section dark">
+<div class="section-head">
+<p class="eyebrow">Empezar con Emitiva</p>
+<div>
+<h2>Minutos para integrar.<br/>Cero semanas leyendo PDFs.</h2>
+<p class="muted">Conecta la API a tu sistema y empieza a emitir comprobantes el mismo día.</p>
+<p style="margin-top:2rem">
+<a class="btn solid" href="#contacto">Probar Emitiva ↗</a>
+</p>
+</div>
+</div>
+</section>
+<section hidden id="firma-segura" class="section" style="background:var(--paper)">
+  <div class="section-head">
+<p class="eyebrow">Clainev / Producto 02</p>
+<div>
+<h2 data-reveal>Firma con contexto, no con miedo.</h2>
+<p data-reveal>Sube tu contrato. La IA traduce lo complejo, detecta riesgos y te muestra en segundos dónde prestar atención.</p>
+</div>
+</div>
+  <div class="principles" data-stagger>
+<article class="principle">
+<span style="color:#218c4b">● Verde</span>
+<h3>Claro</h3>
+<p>Cláusulas habituales que no presentan riesgos evidentes.</p>
+</article>
+<article class="principle">
+<span style="color:#c99800">● Amarillo</span>
+<h3>Revisa</h3>
+<p>Puntos que merecen atención o una pregunta antes de firmar.</p>
+</article>
+<article class="principle">
+<span style="color:#e6422e">● Rojo</span>
+<h3>Alerta</h3>
+<p>Condiciones que podrían perjudicarte o requieren asesoría.</p>
+</article>
+</div>
+  <div class="section-head" style="margin-top:clamp(4rem,8vw,6rem);margin-bottom:2rem">
+<p class="eyebrow">Plan</p>
+<div>
+<h2>Prueba gratis.<br/>Ilimitado por S/29.90.</h2>
+<p class="muted">Una capa práctica de protección antes de tomar decisiones importantes.</p>
+</div>
+</div>
+  <div class="faq-list">{faqFirma.map(([q,a])=>
+<details>
+<summary>{q}</summary>
+<p>{a}</p>
+</details>)}</div>
+</section>
+<section hidden class="section dark">
+<div class="section-head">
+<p class="eyebrow">Probar Firma Segura</p>
+<div>
+<h2>Lo importante, visible de inmediato.</h2>
+<p class="muted">Sube un contrato y recibe el análisis del semáforo en segundos, sin coste inicial.</p>
+<p style="margin-top:2rem">
+<a class="btn solid" href="#contacto">Analizar un contrato ↗</a>
+</p>
+</div>
+</div>
+</section>
+<section id="servicios" class="section service-band">
+<div data-reveal>
+<p class="eyebrow">02 / Desarrollo a medida</p>
+<h2>Tu negocio no cabe en una plantilla.</h2>
+<p>Sistemas de pedidos, control de inventario, automatizaciones e integraciones para restaurantes, bares, minimarkets y PYMEs. Rápido, funcional, sin sobreingeniería.</p>
+<a class="btn solid" href="#contacto">Cuéntanos tu proyecto ↗</a>
+</div>
+<figure class="service-visual"><img src="/clainev-services-ai.webp" alt="Sistema visual de pedidos, inventario y operación para negocios locales"/><figcaption>Operación conectada · menos trabajo manual</figcaption></figure>
+</section>
+<section hidden class="section">
+<div class="section-head">
+<p class="eyebrow">Cómo funciona</p>
+<h2 data-reveal>Del problema al producto, sin teatro.</h2>
+</div>
+<div class="principles" data-stagger>
+<article class="principle">
+<span>01 / Entender</span>
+<h3>Mapeamos</h3>
+<p>Una conversación para entender el problema, usuarios y costo actual.</p>
+</article>
+<article class="principle">
+<span>02 / Probar</span>
+<h3>Validamos</h3>
+<p>Definimos la versión más pequeña que puede demostrar valor.</p>
+</article>
+<article class="principle">
+<span>03 / Lanzar</span>
+<h3>Construimos</h3>
+<p>Entregamos rápido, medimos uso real e iteramos.</p>
+</article>
+</div>
+</section>
+<section class="section dark">
+<div class="section-head">
+<p class="eyebrow">03 / Ideas útiles</p>
+<div>
+<h2 data-reveal>Desde el taller.</h2>
+<p class="muted" data-reveal>Ideas prácticas sobre facturación, contratos y software.</p>
+</div>
+</div>
+<div class="blog-grid">{posts.map(post=>
+<a class="post-card" href={`/blog/${post.id}/`}>
+<img class="post-cover" src={covers[post.data.category] ?? "/blog-software.png"} alt="" loading="lazy"/>
+<div class="post-meta">
+<span>{post.data.category}</span>
+<span>{post.data.readingTime}</span>
+</div>
+<h2>{post.data.title}</h2>
+<p>{post.data.description}</p>
+<span>Leer artículo ↗</span>
+</a>)}</div>
+<p style="margin-top:2rem">
+<a class="btn" href="/blog">Ver todo el blog →</a>
+</p>
+</section>
+<section id="contacto" class="section contact-grid">
+<div>
+<p class="eyebrow">Contacto / Respondemos rápido</p>
+<h1 data-reveal>¿Tienes un problema que resolver?</h1>
+<p data-reveal>Te decimos en la primera llamada si tiene sentido construirlo. ¿Dudas, demo o desarrollo a medida? Escríbenos.</p>
+<p>
+<a class="btn solid" href="https://wa.me/" target="_blank">Escríbenos por WhatsApp ↗</a>
+</p>
+<p class="eyebrow" style="margin-top:4rem">Instagram<br/>
+<a href="https://instagram.com/clainev_oficial">@clainev_oficial ↗</a>
+</p>
+</div>
+<form data-reveal action="mailto:hola@clainev.com" method="post" enctype="text/plain">
+<div class="field">
+<label for="name">Nombre</label>
+<input id="name" name="nombre" required placeholder="Tu nombre"/>
+</div>
+<div class="field">
+<label for="company">Empresa (opcional)</label>
+<input id="company" name="empresa" placeholder="Nombre de tu negocio"/>
+</div>
+<div class="field">
+<label for="email">Correo</label>
+<input id="email" name="correo" type="email" required placeholder="tu@correo.com"/>
+</div>
+<div class="field">
+<label for="help">¿En qué te ayudamos?</label>
+<select id="help" name="interes">
+<option>Emitiva</option>
+<option>Firma Segura</option>
+<option>Desarrollo a medida</option>
+<option>Otro</option>
+</select>
+</div>
+<div class="field">
+<label for="message">Mensaje</label>
+<textarea id="message" name="mensaje" required placeholder="Cuéntanos brevemente el problema">
+</textarea>
+</div>
+<button class="btn solid" type="submit">Enviar mensaje ↗</button>
+<p class="eyebrow">Respondemos en menos de 24 horas hábiles.</p>
+</form>
+</section>
+</main>
+</Layout>
