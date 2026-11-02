@@ -1,9 +1,29 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-const posts=(await getCollection("blog")).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
-const covers: Record<string,string> = { "Facturación":"/blog-facturacion.webp", "Contratos":"/blog-contratos.webp", "Software":"/blog-software.webp" };
+import "../../styles/landing.css";
+import "../../styles/blog.css";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<Layout title="Blog Clainev — Facturación, contratos y software para tu negocio" description="Artículos sobre facturación electrónica, contratos y tecnología para negocios peruanos.">
-  <main class="page"><header class="page-hero blog-landing"><div><p class="eyebrow">Blog / Desde el taller</p><h1>Información que sí puedes usar.</h1><p>Facturación, contratos y software explicados sin jerga para negocios peruanos.</p></div><img src="/clainev-products-ai.webp" alt="Escultura editorial sobre facturación y análisis de contratos"/></header><section class="section" style="padding-top:0"><div class="blog-grid">{posts.map(post=><a class="post-card" href={`/blog/${post.id}/`}><img class="post-cover" src={covers[post.data.category] ?? "/blog-software.webp"} alt="" loading="lazy"/><div class="post-meta"><span>{post.data.category}</span><span>{post.data.readingTime}</span></div><h2>{post.data.title}</h2><p>{post.data.description}</p><span>Leer artículo ↗</span></a>)}</div></section></main>
+
+<Layout title="Blog Clainev — Facturación, contratos y software" description="Ideas prácticas sobre facturación electrónica, contratos y software para negocios peruanos.">
+  <main class="fl-page bl-page">
+    <header class="bl-hero">
+      <span class="fl-pixel fl-pixel-blue" aria-hidden="true"></span>
+      <p class="fl-kicker">CLAINEV / DESDE EL TALLER</p>
+      <h1>Ideas que <strong>puedes usar.</strong></h1>
+      <p>Facturación, contratos y software explicados con claridad para negocios peruanos.</p>
+      <div class="bl-hero-bottom"><span>ARTÍCULOS / {String(posts.length).padStart(2, "0")}</span><span>LEER · APRENDER · APLICAR</span></div>
+    </header>
+    <section class="bl-list" aria-label="Todos los artículos">
+      {posts.map((post, index) => <a class="bl-card" href={`/blog/${post.id}/`}>
+        <div class="bl-card-top"><span>{String(index + 1).padStart(2, "0")} / {post.data.category.toUpperCase()}</span><span>{post.data.readingTime}</span></div>
+        <div class="bl-card-body"><h2>{post.data.title}</h2><p>{post.data.description}</p></div>
+        <div class="bl-card-bottom"><span>LEER ARTÍCULO</span><span aria-hidden="true">↗</span></div>
+      </a>)}
+    </section>
+    <div class="bl-back"><a class="fl-text-link" href="/">← Volver al inicio</a></div>
+  </main>
 </Layout>
