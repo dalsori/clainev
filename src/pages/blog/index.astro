@@ -11,17 +11,15 @@ const posts = (await getCollection("blog"))
 <Layout title="Blog Clainev — Facturación, contratos y software" description="Ideas prácticas sobre facturación electrónica, contratos y software para negocios peruanos.">
   <main class="fl-page bl-page">
     <header class="bl-hero">
-      <span class="fl-pixel fl-pixel-blue" aria-hidden="true"></span>
-      <p class="fl-kicker">CLAINEV / DESDE EL TALLER</p>
       <h1>Ideas que <strong>puedes usar.</strong></h1>
       <p>Facturación, contratos y software explicados con claridad para negocios peruanos.</p>
-      <div class="bl-hero-bottom"><span>ARTÍCULOS / {String(posts.length).padStart(2, "0")}</span><span>LEER · APRENDER · APLICAR</span></div>
+      <div class="bl-hero-bottom"><span>ARTÍCULOS: {posts.length}</span><span>LEER · APRENDER · APLICAR</span></div>
     </header>
     <section class="bl-list" aria-label="Todos los artículos">
-      {posts.map((post, index) => <a class="bl-card" href={`/blog/${post.id}/`}>
-        <div class="bl-card-top"><span>{String(index + 1).padStart(2, "0")} / {post.data.category.toUpperCase()}</span><span>{post.data.readingTime}</span></div>
+      {posts.map((post) => <a class="bl-card" href={`/blog/${post.id}/`}>
+        <div class="bl-card-top"><span>{post.data.category.toUpperCase()}</span><span>{post.data.readingTime}</span></div>
         <div class="bl-card-body"><h2>{post.data.title}</h2><p>{post.data.description}</p></div>
-        <div class="bl-card-bottom"><span>LEER ARTÍCULO</span><span aria-hidden="true">↗</span></div>
+        <div class="bl-card-bottom"><span>LEER ARTÍCULO</span></div>
       </a>)}
     </section>
     <div class="bl-back"><a class="fl-text-link" href="/">← Volver al inicio</a></div>

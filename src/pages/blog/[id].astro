@@ -17,13 +17,11 @@ const { Content } = await render(post);
     <article class="bl-article">
       <header class="bl-article-header">
         <a class="bl-breadcrumb" href="/blog">← TODOS LOS ARTÍCULOS</a>
-        <span class="fl-pixel fl-pixel-orange" aria-hidden="true"></span>
-        <p class="fl-kicker">{post.data.category.toUpperCase()} / {post.data.readingTime.toUpperCase()} DE LECTURA</p>
         <h1>{post.data.title}</h1>
         <p class="bl-deck">{post.data.description}</p>
       </header>
       <div class="bl-article-body"><Content /></div>
-      <footer class="bl-article-end"><span>✳</span><p>Más ideas útiles para tu negocio.</p><a class="fl-button fl-button-primary" href="/blog">VER TODOS LOS ARTÍCULOS <span aria-hidden="true">↗</span></a></footer>
+      <footer class="bl-article-end"><p>Más ideas útiles para tu negocio.</p><a class="fl-button fl-button-primary" href="/blog">VER TODOS LOS ARTÍCULOS</a></footer>
     </article>
   </main>
 </Layout>
